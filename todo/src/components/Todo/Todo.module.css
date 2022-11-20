@@ -15,7 +15,6 @@
   outline: none;
   border: none;
   background-color: rgb(231, 231, 231);
-  width: fit-content;
 }
 .input_text:focus {
   outline: solid;
@@ -37,4 +36,10 @@
 
 .completed {
   text-decoration: line-through;
+}
+
+@media(max-width:650px){
+.input_text {
+   width: 70%;
+  }
 }
