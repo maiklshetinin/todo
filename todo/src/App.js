@@ -27,6 +27,15 @@ function App() {
     })
   }
 
+  const editInput = async (text, id) => {
+    console.log('gg');
+    console.log(text)
+
+    await updateDoc(doc(db, 'todos', id), {
+      text: text
+    })
+  }
+
   const createTodo = async (e) => {
     e.preventDefault(e)
     if (!input) return;
@@ -61,6 +70,7 @@ function App() {
             todo={todo}
             toggleHandler={toggleHandler}
             deleteTodo={deleteTodo}
+            editInput={editInput}
           />
         ))}
       </ul>

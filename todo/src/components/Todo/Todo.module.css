@@ -8,10 +8,19 @@
   /* box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2); */
 }
 
-.text {
+.input_text {
   font-size: 20px;
   font-weight: 500;
   color: rgb(172, 172, 172);
+  outline: none;
+  border: none;
+  background-color: rgb(231, 231, 231);
+  width: fit-content;
+}
+.input_text:focus {
+  outline: solid;
+  outline-width: 2px;
+  outline-color: rgb(32, 90, 251);
 }
 
 .btn {
