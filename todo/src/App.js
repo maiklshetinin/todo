@@ -84,11 +84,11 @@ function App() {
         <label className='input_file'>
           choose file
           <input
-            // className='hidden'
+            className='hidden'
             type='file'
             accept="image/*, .png,.gif,jpg,.web"
             onChange={(e) => uploadFiles(e)} />
-          {/* <SvgSelector id='clip' /> */}
+          <SvgSelector id='clip' />
         </label>
         <button className='button'><SvgSelector id='add' /></button>
       </form>
