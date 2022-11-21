@@ -1,22 +1,38 @@
 .todo_item {
   padding-left: 10px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   justify-content: space-between;
   width: 100%;
   list-style: none;
   background-color: rgb(231, 231, 231);
   /* box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2); */
 }
-
-.input_text {
-  font-size: 20px;
+.title {
+  font-size: 25px;
   font-weight: 500;
   color: rgb(172, 172, 172);
   outline: none;
   border: none;
   background-color: rgb(231, 231, 231);
+  text-align: center;
 }
-.input_text:focus {
+.text {
+  height: auto;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(172, 172, 172);
+  outline: none;
+  border: none;
+  background-color: rgb(231, 231, 231);
+    border: none;
+      background-color: transparent;
+      resize: none;
+      outline: none;
+}
+
+.input:focus{
   outline: solid;
   outline-width: 2px;
   outline-color: rgb(32, 90, 251);
@@ -36,6 +52,17 @@
 
 .completed {
   text-decoration: line-through;
+}
+
+.container{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.input_completed{
+  width: 24px;
+  height: 24px;
 }
 
 @media(max-width:650px){

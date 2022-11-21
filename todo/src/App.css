@@ -28,9 +28,12 @@ body {
 
 .form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   gap: 10px;
   justify-content: space-between;
+
 }
 
 .todo_items {
@@ -44,8 +47,16 @@ body {
 .input {
   font-size: 18px;
   padding-left: 10px;
-  width: 100%;
+  width: 60%;
   border: none;
+}
+
+.input_title{
+  height: 35px;
+  font-size: 25px;
+}
+.input_text{
+  height: 30px;
 }
 
 .input:focus {
@@ -72,7 +83,8 @@ body {
   .container {
     width: 100%;
   }
-  body{
+
+  body {
     padding-left: 20px;
     padding-right: 20px;
   }

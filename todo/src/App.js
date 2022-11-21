@@ -7,7 +7,8 @@ import { SvgSelector } from './components/SvgSelector/SvgSelector';
 
 function App() {
   const [todos, setTodos] = useState([])
-  const [input, setInput] = useState('')
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
 
   useEffect(() => {
     const q = query(collection(db, 'todos'))
@@ -27,24 +28,24 @@ function App() {
     })
   }
 
-  const editInput = async (text, id) => {
-    console.log('gg');
-    console.log(text)
-
+  const updateTodo = async (title, text, id) => {
     await updateDoc(doc(db, 'todos', id), {
+      title: title,
       text: text
     })
   }
 
   const createTodo = async (e) => {
     e.preventDefault(e)
-    if (!input) return;
+    if (!title || !text) return;
 
     await addDoc(collection(db, 'todos'), {
-      text: input,
+      title: title,
+      text: text,
       completed: false
     })
-    setInput('')
+    setTitle('')
+    setText('')
   }
 
   const deleteTodo = async (id) => {
@@ -57,10 +58,9 @@ function App() {
       <form
         onSubmit={createTodo}
         className='form'>
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className='input' type='text' placeholder='add todo' />
+        <input value={title} onChange={(e) => setTitle(e.target.value)} className='input input_title' type='text' placeholder='title todo' />
+        <input value={text} onChange={(e) => setText(e.target.value)} className='input input_text' type='text' placeholder='add todo' />
+
         <button className='button'><SvgSelector id='add' /></button>
       </form>
       <ul className='todo_items'>
@@ -70,11 +70,11 @@ function App() {
             todo={todo}
             toggleHandler={toggleHandler}
             deleteTodo={deleteTodo}
-            editInput={editInput}
+            updateTodo={updateTodo}
           />
         ))}
       </ul>
-    </div>
+    </div >
   );
 }
 

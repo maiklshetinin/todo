@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { SvgSelector } from "../SvgSelector/SvgSelector";
 import style from './Todo.module.css'
 
-export const Todo = ({ todo, toggleHandler, deleteTodo, editInput }) => {
+export const Todo = ({ todo, toggleHandler, deleteTodo, updateTodo }) => {
+  const [title, setTitle] = useState(todo.title)
+  const [text, setText] = useState(todo.text)
+
+
+  const update = (e) => {
+    updateTodo(title, text, todo.id)
+  }
+
+  function textAreaAdjust(e) {
+    e.target.style.height = "1px";
+    e.target.style.height = (25 + e.target.scrollHeight) + "px";
+  }
+
   return (
     <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
       <input
-        onChange={() => toggleHandler(todo)}
-        type='checkbox' checked={todo.completed} />
-      <input
+        className={`${style.input} ${style.title}`}
         type='text'
-        onChange={(e) => editInput(e.target.value,todo.id)}
-      className={style.input_text}
-      value={todo.text}
+        onChange={(e) => { setTitle(e.target.value) }}
+        value={title}
       />
-      <button onClick={() => deleteTodo(todo.id)} className={style.btn}><SvgSelector id='delete' /></button>
+      <textarea
+        className={`${style.input} ${style.text}`}
+        type='text'
+        onChange={(e) => { setText(e.target.value) }}
+        onBlur={(e) => {
+          update()
+          textAreaAdjust(e)}
+        }
+      value={text}
+      />
+      <div className={style.container}>
+        <input
+          className={style.input_completed}
+          onChange={() => toggleHandler(todo)}
+          type='checkbox' checked={todo.completed} />
+        <button onClick={() => deleteTodo(todo.id)} className={style.btn}><SvgSelector id='delete' /></button>
+      </div>
+
     </li >
   )
 }
