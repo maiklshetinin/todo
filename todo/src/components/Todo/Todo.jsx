@@ -30,15 +30,23 @@ export const Todo = ({ todo, toggleHandler, deleteTodo, updateTodo }) => {
         onChange={(e) => { setText(e.target.value) }}
         onBlur={(e) => {
           update()
-          textAreaAdjust(e)}
+          textAreaAdjust(e)
         }
-      value={text}
+        }
+        value={text}
       />
       <div className={style.container}>
+        <div className={style.img_container}>
+          <img className={style.img} alt='img' src={todo.image} />
+        </div>
         <input
           className={style.input_completed}
           onChange={() => toggleHandler(todo)}
           type='checkbox' checked={todo.completed} />
+        <label className={style.input_file}>
+          <input type='file' />
+          <SvgSelector id='clip' />
+        </label>
         <button onClick={() => deleteTodo(todo.id)} className={style.btn}><SvgSelector id='delete' /></button>
       </div>
 

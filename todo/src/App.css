@@ -59,6 +59,16 @@ body {
   height: 30px;
 }
 
+.input_file{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.input_file:hover{
+  cursor: pointer;
+
+}
+
 .input:focus {
   outline: solid;
   outline-width: 2px;
@@ -77,6 +87,15 @@ body {
 .button:hover {
   cursor: pointer;
   background-color: rgb(81, 127, 255);
+}
+.hidden{
+  opacity: 0;
+  height: 0;
+  width: 0;
+  line-height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 @media(max-width:650px) {
