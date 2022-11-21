@@ -87,6 +87,16 @@ fill: rgb(135, 135, 135);
       object-fit: cover;
 }
 
+.hidden {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  line-height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
 @media(max-width:650px) {
   .input_text {
     width: 70%;

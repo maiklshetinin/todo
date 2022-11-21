@@ -82,6 +82,7 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
           type='checkbox' checked={todo.completed} />
         <label className={style.input_file}>
           <input type='file'
+             className='hidden'
             onChange={upload}
           />
           <SvgSelector id='clip' />
