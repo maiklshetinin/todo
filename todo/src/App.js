@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Todo } from './components/Todo/Todo';
 import { SvgSelector } from './components/SvgSelector/SvgSelector';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { updateTodo } from './api/updateTodo';
+
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   const [text, setText] = useState('')
   const [url, setUrl] = useState('')
   const [nameImg, setNameImg] = useState('')
+  const [heightText, setHeightText] = useState('')
 
 
 
@@ -31,18 +32,15 @@ function App() {
     return () => unsubscribe()
   }, [])
 
-  const toggleHandler = async (todo) => {
-    await updateDoc(doc(db, 'todos', todo.id), {
-      completed: !todo.completed
-    })
-  }
+
 
   const createTodo = async (e) => {
     e.preventDefault(e)
-    // if (!title || !text) return;
+    // if (!url || !nameImg ) return;
     await addDoc(collection(db, 'todos'), {
-      title: title,
-      text: text,
+      title: title ? title : 'title',
+      text: text ? text : 'text',
+      heightText: heightText,
       image: url,
       nameImage: nameImg,
       completed: false
@@ -50,10 +48,8 @@ function App() {
     setTitle('')
     setText('')
     setUrl('')
-  }
-
-  const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, 'todos', id))
+    setNameImg('')
+    setHeightText('22px')
   }
 
   const uploadFiles = (e) => {
@@ -67,21 +63,37 @@ function App() {
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref)
-          .then(url => setUrl(url))
+          .then(url => {
+            setProgress(0)
+            setUrl(url)
+          })
       }
     )
   }
 
+  function textAreaAdjust(e) {
+    e.target.style.height = "1px";
+    e.target.style.height = (e.target.scrollHeight) + "px";
+    setHeightText((e.target.scrollHeight) + "px")
+  }
+
   return (
     <div className='container'>
-      <h3>Uploaded {progress} %</h3>
+      {progress ? <h3 className='progress'>Uploaded {progress} %</h3> : ''}
       <h3 className='title'>Todo</h3>
       <form
         onSubmit={createTodo}
         className='form'>
         <input value={title} onChange={(e) => setTitle(e.target.value)} className='input input_title' type='text' placeholder='title todo' />
-        <input value={text} onChange={(e) => setText(e.target.value)} className='input input_text' type='text' placeholder='add todo' />
+        <textarea value={text}
+          style={{ height: heightText }}
+          onChange={(e) => {
+            setText(e.target.value)
+            textAreaAdjust(e)
+          }}
+          className='textarea' type='text' placeholder='add todo' />
         <label className='input_file'>
+          <div className='container_img'> <img className='img' src={url} alt='url' /></div>
           choose file
           <input
             className='hidden'
@@ -90,17 +102,12 @@ function App() {
             onChange={(e) => uploadFiles(e)} />
           <SvgSelector id='clip' />
         </label>
-        <button className='button'><SvgSelector id='add' /></button>
+        <button
+          className='button'><SvgSelector id='add' /></button>
       </form>
       <ul className='todo_items'>
         {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            todo={todo}
-            toggleHandler={toggleHandler}
-            deleteTodo={deleteTodo}
-            uploadFiles={uploadFiles}
-          />
+          <Todo key={index} todo={todo} />
         ))}
       </ul>
     </div >

@@ -1,12 +1,15 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { deleteFile } from "../../api/deleteFiles";
+import { deleteTodo } from "../../api/deleteTodo";
+import { toggleHandler } from "../../api/toggleHandler";
 import { updateTodo } from "../../api/updateTodo";
 import { storage } from "../../firebase";
 import { SvgSelector } from "../SvgSelector/SvgSelector";
 import style from './Todo.module.css'
 
-export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
+export const Todo = ({ todo }) => {
+  const [progress, setProgress] = useState(0)
   const [title, setTitle] = useState(todo.title)
   const [text, setText] = useState(todo.text)
   const [nameImage, setNameImg] = useState(todo.nameImage)
@@ -18,13 +21,14 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
     const uploadTask = uploadBytesResumable(storageRef, e.target.files[0])
     uploadTask.on('state_changed', (snapshot) => {
       const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-      // setProgress(prog)
+      setProgress(prog)
     },
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref)
           .then(url => {
             setUrl(url)
+            setProgress(0)
             updateTodo(title, text, e.target.files[0].name, url, todo.id)
           })
       }
@@ -37,7 +41,7 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
 
   function textAreaAdjust(e) {
     e.target.style.height = "1px";
-    e.target.style.height = (25 + e.target.scrollHeight) + "px";
+    e.target.style.height = ( e.target.scrollHeight) + "px";
   }
 
   const handler = () => {
@@ -60,7 +64,8 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
         value={title}
       />
       <textarea
-        className={`${style.input} ${style.text}`}
+        style={{ height: todo.heightText }}
+        className={`${style.textarea} ${style.text}`}
         type='text'
         onChange={(e) => { setText(e.target.value) }}
         onBlur={(e) => {
@@ -75,6 +80,7 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
           onClick={handler}
           className={style.img_container} >
           <img className={style.img} alt='img' src={url} />
+          {progress ? <h3>Uploaded {progress} %</h3> : ''}
         </div>
         <input
           className={style.input_completed}
@@ -82,14 +88,13 @@ export const Todo = ({ todo, toggleHandler, deleteTodo }) => {
           type='checkbox' checked={todo.completed} />
         <label className={style.input_file}>
           <input type='file'
-             className='hidden'
+            className='hidden'
             onChange={upload}
           />
           <SvgSelector id='clip' />
         </label>
-        <button onClick={() => deleteTodo(todo.id)} className={style.btn}><SvgSelector id='delete' /></button>
+        <button onClick={() => deleteTodo(todo)} className={style.btn}><SvgSelector id='delete' /></button>
       </div>
-
     </li >
   )
 }

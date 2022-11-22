@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-.text {
+.textarea {
   height: auto;
   font-size: 18px;
   font-weight: 500;
@@ -32,6 +32,12 @@
   background-color: transparent;
   resize: none;
   outline: none;
+}
+
+.textarea:focus {
+  outline: solid;
+  outline-width: 2px;
+  outline-color: rgb(32, 90, 251);
 }
 
 .input:focus {
@@ -68,23 +74,23 @@
   height: 24px;
 }
 
-.input_file{
+.input_file {}
 
-}
-.input_file :hover{
-cursor: pointer;
-fill: rgb(135, 135, 135);
+.input_file :hover {
+  cursor: pointer;
+  fill: rgb(135, 135, 135);
 }
 
-.img_container{
+.img_container {
   width: 100%;
   height: 100px;
 
 }
-.img{
-      height: 100px;
-      width: 100px;
-      object-fit: cover;
+
+.img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
 }
 
 .hidden {
