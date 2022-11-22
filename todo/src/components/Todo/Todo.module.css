@@ -20,25 +20,7 @@
   text-align: center;
 }
 
-.textarea {
-  height: auto;
-  font-size: 18px;
-  font-weight: 500;
-  color: rgb(172, 172, 172);
-  outline: none;
-  border: none;
-  background-color: rgb(231, 231, 231);
-  border: none;
-  background-color: transparent;
-  resize: none;
-  outline: none;
-}
 
-.textarea:focus {
-  outline: solid;
-  outline-width: 2px;
-  outline-color: rgb(32, 90, 251);
-}
 
 .input:focus {
   outline: solid;
@@ -67,18 +49,6 @@
   justify-content: space-between;
   align-content: center;
   align-items: center;
-}
-
-.input_completed {
-  width: 24px;
-  height: 24px;
-}
-
-.input_file {}
-
-.input_file :hover {
-  cursor: pointer;
-  fill: rgb(135, 135, 135);
 }
 
 .img_container {

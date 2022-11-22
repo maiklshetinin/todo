@@ -6,6 +6,9 @@ import { toggleHandler } from "../../api/toggleHandler";
 import { updateTodo } from "../../api/updateTodo";
 import { storage } from "../../firebase";
 import { SvgSelector } from "../SvgSelector/SvgSelector";
+import { Checkbox } from "./Checkbox/Checkbox";
+import { FileTodo } from "./FileTodo/FileTodo";
+import { TextAreaTodo } from "./TextAreaTodo/TextAreaTodo";
 import style from './Todo.module.css'
 
 export const Todo = ({ todo }) => {
@@ -14,6 +17,7 @@ export const Todo = ({ todo }) => {
   const [text, setText] = useState(todo.text)
   const [nameImage, setNameImg] = useState(todo.nameImage)
   const [url, setUrl] = useState(todo.image)
+  const [heightText, setHeightText] = useState(todo.heightText)
 
   const uploadFiles = (e) => {
     setNameImg(e.target.files[0].name)
@@ -29,70 +33,60 @@ export const Todo = ({ todo }) => {
           .then(url => {
             setUrl(url)
             setProgress(0)
-            updateTodo(title, text, e.target.files[0].name, url, todo.id)
+            updateTodo(title, text, heightText, e.target.files[0].name, url, todo.id)
           })
       }
     )
   }
 
-  const update = (e) => {
-    updateTodo(title, text, nameImage, url, todo.id)
+  const update = () => {
+    updateTodo(title, text, heightText, nameImage, url, todo.id)
   }
 
-  function textAreaAdjust(e) {
-    e.target.style.height = "1px";
-    e.target.style.height = ( e.target.scrollHeight) + "px";
-  }
 
   const handler = () => {
-    deleteFile(nameImage)
-    setNameImg('')
-    setUrl('')
-    updateTodo(title, text, '', '', todo.id)
+    if (nameImage) {
+      deleteFile(nameImage)
+      setNameImg('')
+      setUrl('')
+      updateTodo(title, text, heightText, '', '', todo.id)
+    }
   }
 
-  const upload = (e) => {
-    uploadFiles(e, todo.id, title, text,)
-  }
+  // const upload = (e) => {
+  //   uploadFiles(e, todo.id, title, text,)
+  // }
 
   return (
     <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
       <input
+        value={title}
         className={`${style.input} ${style.title}`}
         type='text'
         onChange={(e) => { setTitle(e.target.value) }}
-        value={title}
       />
-      <textarea
-        style={{ height: todo.heightText }}
-        className={`${style.textarea} ${style.text}`}
-        type='text'
-        onChange={(e) => { setText(e.target.value) }}
-        onBlur={(e) => {
-          update()
-          textAreaAdjust(e)
-        }
-        }
-        value={text}
+      <TextAreaTodo
+        text={text}
+        setHeightText={setHeightText}
+        heightText={heightText}
+        update={update}
+        setText={setText}
       />
+
       <div className={style.container}>
+
         <div
           onClick={handler}
           className={style.img_container} >
           <img className={style.img} alt='img' src={url} />
           {progress ? <h3>Uploaded {progress} %</h3> : ''}
         </div>
-        <input
-          className={style.input_completed}
-          onChange={() => toggleHandler(todo)}
-          type='checkbox' checked={todo.completed} />
-        <label className={style.input_file}>
-          <input type='file'
-            className='hidden'
-            onChange={upload}
-          />
-          <SvgSelector id='clip' />
-        </label>
+
+
+        <Checkbox todo={todo} />
+
+        <FileTodo uploadFiles={uploadFiles } />
+
         <button onClick={() => deleteTodo(todo)} className={style.btn}><SvgSelector id='delete' /></button>
       </div>
     </li >

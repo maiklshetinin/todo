@@ -1,0 +1,19 @@
+.textarea {
+  height: auto;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(172, 172, 172);
+  outline: none;
+  border: none;
+  background-color: rgb(231, 231, 231);
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}
+
+.textarea:focus {
+  outline: solid;
+  outline-width: 2px;
+  outline-color: rgb(32, 90, 251);
+}
