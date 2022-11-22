@@ -15,6 +15,7 @@ function App() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id })
       })
+      console.log(' console.log(todosArr)',todosArr);
       setTodos(todosArr)
     })
     return () => unsubscribe()

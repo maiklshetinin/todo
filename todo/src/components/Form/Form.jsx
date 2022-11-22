@@ -14,10 +14,10 @@ export const Form = () => {
 
   const createTodo = async (e) => {
     e.preventDefault(e)
-    // if (!url || !nameImg ) return;
+    // if (!title || !text ) return;
     await addDoc(collection(db, 'todos'), {
-      title: title ? title : 'title',
-      text: text ? text : 'text',
+      title: title,
+      text: text,
       heightText: heightText,
       image: url,
       nameImage: nameImg,
@@ -54,7 +54,14 @@ export const Form = () => {
       onSubmit={createTodo}
       className='form'>
       {progress ? <h3 className='progress'>Uploaded {progress} %</h3> : ''}
-      <input value={title} onChange={(e) => setTitle(e.target.value)} className='input input_title' type='text' placeholder='title todo' />
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className='input input_title'
+        type='text'
+        placeholder='title todo'
+      />
+
       <TextAreaForm
         heightText={heightText}
         text={text}

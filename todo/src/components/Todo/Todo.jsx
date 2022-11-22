@@ -64,7 +64,8 @@ export const Todo = ({ todo }) => {
           value={title}
           className={`${style.input} ${style.title}`}
           type='text'
-          onChange={(e) => { setTitle(e.target.value) }}
+        onChange={(e) => { setTitle(e.target.value) }}
+        onBlur={update}
         />
 
       <TextAreaTodo
