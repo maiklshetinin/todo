@@ -5,7 +5,7 @@ export const TextAreaTodo = ({ heightText, text, setText, update, setHeightText 
 
   function textAreaAdjust(e) {
     e.target.style.height = "1px";
-    e.target.style.height = (e.target.scrollHeight) + "px";
+    e.target.style.height = (1 + e.target.scrollHeight) + "px";
     setHeightText((e.target.scrollHeight) + "px")
   }
 
@@ -21,7 +21,7 @@ export const TextAreaTodo = ({ heightText, text, setText, update, setHeightText 
       style={{ height: heightText }}
       type='text'
       onChange={handler}
-      onBlur={()=>update()}
+      onBlur={() => update()}
     />
   )
 }

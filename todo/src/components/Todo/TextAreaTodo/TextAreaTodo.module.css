@@ -1,5 +1,6 @@
 .textarea {
-  height: auto;
+  /* height: auto;. */
+  width: 100%;
   font-size: 18px;
   font-weight: 500;
   color: rgb(172, 172, 172);

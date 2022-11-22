@@ -75,18 +75,15 @@ export const Todo = ({ todo }) => {
 
       <div className={style.container}>
 
-        <div
-          onClick={handler}
-          className={style.img_container} >
+        <div className={style.img_container} >
+          {/* onClick={handler} */}
+          <button></button>
           <img className={style.img} alt='img' src={url} />
           {progress ? <h3>Uploaded {progress} %</h3> : ''}
         </div>
 
-
         <Checkbox todo={todo} />
-
         <FileTodo uploadFiles={uploadFiles } />
-
         <button onClick={() => deleteTodo(todo)} className={style.btn}><SvgSelector id='delete' /></button>
       </div>
     </li >
