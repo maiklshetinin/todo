@@ -59,12 +59,14 @@ export const Todo = ({ todo }) => {
 
   return (
     <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
-      <input
-        value={title}
-        className={`${style.input} ${style.title}`}
-        type='text'
-        onChange={(e) => { setTitle(e.target.value) }}
-      />
+
+        <input
+          value={title}
+          className={`${style.input} ${style.title}`}
+          type='text'
+          onChange={(e) => { setTitle(e.target.value) }}
+        />
+
       <TextAreaTodo
         text={text}
         setHeightText={setHeightText}

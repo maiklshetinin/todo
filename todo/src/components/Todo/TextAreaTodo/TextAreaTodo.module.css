@@ -3,12 +3,13 @@
   width: 100%;
   font-size: 18px;
   font-weight: 500;
-  color: rgb(172, 172, 172);
+  color: rgb(65, 65, 65);
   outline: none;
   border: none;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(219, 219, 219);
+  /* border-radius: 5px; */
   border: none;
-  background-color: transparent;
+  /* background-color: transparent; */
   resize: none;
   outline: none;
 }

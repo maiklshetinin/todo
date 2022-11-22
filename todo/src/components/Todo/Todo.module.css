@@ -1,5 +1,8 @@
 .todo_item {
-  padding-left: 10px;
+  position: relative;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -7,8 +10,12 @@
   width: 100%;
   list-style: none;
   background-color: rgb(231, 231, 231);
+    border-radius: 5px;
   /* box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2); */
 }
+
+
+
 
 .title {
   font-size: 25px;
@@ -16,7 +23,7 @@
   color: rgb(172, 172, 172);
   outline: none;
   border: none;
-  background-color: rgb(231, 231, 231);
+  /* background-color: rgb(86, 183, 21); */
   text-align: center;
 }
 
