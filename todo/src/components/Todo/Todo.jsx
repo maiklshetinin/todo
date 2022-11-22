@@ -1,5 +1,6 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { deleteFile } from "../../api/deleteFiles";
 import { deleteTodo } from "../../api/deleteTodo";
 import { toggleHandler } from "../../api/toggleHandler";
@@ -13,11 +14,19 @@ import style from './Todo.module.css'
 
 export const Todo = ({ todo }) => {
   const [progress, setProgress] = useState(0)
-  const [title, setTitle] = useState(todo.title)
-  const [text, setText] = useState(todo.text)
-  const [nameImage, setNameImg] = useState(todo.nameImage)
-  const [url, setUrl] = useState(todo.image)
-  const [heightText, setHeightText] = useState(todo.heightText)
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
+  const [nameImage, setNameImg] = useState('')
+  const [url, setUrl] = useState('')
+  const [heightText, setHeightText] = useState('')
+
+  useEffect(() => {
+    setTitle(todo.title)
+    setText(todo.text)
+    setNameImg(todo.nameImage)
+    setUrl(todo.image)
+    setHeightText(todo.heightText)
+  }, [todo])
 
   const uploadFiles = (e) => {
     setNameImg(e.target.files[0].name)
