@@ -1,0 +1,30 @@
+.img_container {
+  position: relative;
+  width: fit-content;
+  height: 100px;
+}
+
+.remove_img {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+}
+
+.remove_img :hover {
+  cursor: pointer;
+  fill: red;
+  transition: .3s all ease-in;
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+
+
+.img:active {
+  transform: scale(2);
+  transition: .3s all ease-in;
+}

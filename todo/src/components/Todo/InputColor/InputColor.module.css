@@ -1,0 +1,15 @@
+.input_color_container {
+  position: absolute;
+  left: 12px;
+  top: 13px;
+}
+
+.input_color_container:hover {
+  cursor: pointer;
+}
+
+.input_color {
+  all: unset;
+  opacity: 0;
+  z-index: -10;
+}

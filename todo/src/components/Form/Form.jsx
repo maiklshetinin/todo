@@ -2,8 +2,11 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import { db, storage } from "../../firebase";
+import { InputFile } from "../InputFile/InputFile";
 import { SvgSelector } from "../SvgSelector/SvgSelector";
 import { TextAreaForm } from "./TextareaForm/TextAreaForm";
+import style from './Form.module.css'
+import { InputTitleForm } from "./InputTitleForm/InputTitleForm";
 export const Form = () => {
   const [progress, setProgress] = useState(0)
   const [title, setTitle] = useState('')
@@ -14,9 +17,9 @@ export const Form = () => {
 
   const createTodo = async (e) => {
     e.preventDefault(e)
-    // if (!title || !text ) return;
     await addDoc(collection(db, 'todos'), {
       title: title,
+      color: '#ffffff',
       text: text,
       heightText: heightText,
       image: url,
@@ -50,17 +53,11 @@ export const Form = () => {
   }
 
   return (
-    <form
-      onSubmit={createTodo}
-      className='form'>
-      {progress ? <h3 className='progress'>Uploaded {progress} %</h3> : ''}
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className='input input_title'
-        type='text'
-        placeholder='title todo'
-      />
+    <form onSubmit={createTodo} className={style.form}>
+
+      {progress ? <h3 className={style.progress}>Uploaded {progress} %</h3> : ''}
+
+      <InputTitleForm title={title} setTitle={setTitle} />
 
       <TextAreaForm
         heightText={heightText}
@@ -68,18 +65,12 @@ export const Form = () => {
         setText={setText}
         setHeightText={setHeightText}
       />
-      <label className='input_file'>
-        <div className='container_img'> <img className='img' src={url} alt='url' /></div>
-        choose file
-        <input
-          className='hidden'
-          type='file'
-          accept="image/*, .png,.gif,jpg,.web"
-          onChange={(e) => uploadFiles(e)} />
-        <SvgSelector id='clip' />
-      </label>
-      <button
-        className='button'><SvgSelector id='add' /></button>
+
+      {url && <div className={style.container_img}><img className={style.img} src={url} alt='url' /></div>}
+
+      <InputFile uploadFiles={uploadFiles} />
+
+      <button className={style.button}><SvgSelector id='add' /></button>
     </form>
   )
 }
