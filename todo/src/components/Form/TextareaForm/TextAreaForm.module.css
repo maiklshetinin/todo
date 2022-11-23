@@ -9,6 +9,11 @@
   border: none;
   resize: none;
   outline: none;
+  place-content: none;
+  text-align: left;
+}
+
+.textarea::placeholder{
   text-align: center;
 }
 

@@ -9,6 +9,7 @@
 }
 
 .input:focus {
+  place-content: none;
   outline: solid;
   outline-width: 2px;
   outline-color: rgb(32, 90, 251);
