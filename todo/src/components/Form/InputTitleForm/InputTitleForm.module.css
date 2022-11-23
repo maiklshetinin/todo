@@ -5,6 +5,7 @@
   border: none;
   height: 35px;
   font-size: 25px;
+  text-align: center;
 }
 
 .input:focus {

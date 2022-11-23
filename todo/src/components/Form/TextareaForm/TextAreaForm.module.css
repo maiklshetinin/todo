@@ -9,6 +9,7 @@
   border: none;
   resize: none;
   outline: none;
+  text-align: center;
 }
 
 .textarea:focus {

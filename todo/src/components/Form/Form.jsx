@@ -7,6 +7,11 @@ import { SvgSelector } from "../SvgSelector/SvgSelector";
 import { TextAreaForm } from "./TextareaForm/TextAreaForm";
 import style from './Form.module.css'
 import { InputTitleForm } from "./InputTitleForm/InputTitleForm";
+import 'dayjs/locale/es'
+import dayjs from "dayjs";
+import { InputDate } from "./InputDate/InputDate";
+
+
 export const Form = () => {
   const [progress, setProgress] = useState(0)
   const [title, setTitle] = useState('')
@@ -14,6 +19,8 @@ export const Form = () => {
   const [url, setUrl] = useState('')
   const [nameImg, setNameImg] = useState('')
   const [heightText, setHeightText] = useState('')
+  // const [dateNow, setDateNow] = useState('')
+  const [date, setDate] = useState('')
 
   const createTodo = async (e) => {
     e.preventDefault(e)
@@ -21,6 +28,7 @@ export const Form = () => {
       title: title,
       color: '#ffffff',
       text: text,
+      date: date,
       heightText: heightText,
       image: url,
       nameImage: nameImg,
@@ -54,9 +62,7 @@ export const Form = () => {
 
   return (
     <form onSubmit={createTodo} className={style.form}>
-
       {progress ? <h3 className={style.progress}>Uploaded {progress} %</h3> : ''}
-
       <InputTitleForm title={title} setTitle={setTitle} />
 
       <TextAreaForm
@@ -67,6 +73,8 @@ export const Form = () => {
       />
 
       {url && <div className={style.container_img}><img className={style.img} src={url} alt='url' /></div>}
+
+      <InputDate date={date} setDate={setDate} />
 
       <InputFile uploadFiles={uploadFiles} />
 

@@ -13,6 +13,8 @@ import { InputTitle } from "./InputTitle/InputTitle"
 import style from './Todo.module.css'
 import { InputFile } from "../InputFile/InputFile";
 import { Img } from "./Img/Img";
+import { InputDateTodo } from "./InputDateTodo/InputDateTodo";
+import dayjs from "dayjs";
 
 
 export const Todo = ({ todo }) => {
@@ -23,6 +25,7 @@ export const Todo = ({ todo }) => {
   const [url, setUrl] = useState('')
   const [heightText, setHeightText] = useState('')
   const [color, setColor] = useState('')
+  const [date, setDate] = useState('')
 
   useEffect(() => {
     setTitle(todo.title)
@@ -31,6 +34,7 @@ export const Todo = ({ todo }) => {
     setUrl(todo.image)
     setHeightText(todo.heightText)
     setColor(todo.color)
+    setDate(todo.date)
   }, [todo])
 
   const uploadFiles = (e) => {
@@ -54,7 +58,7 @@ export const Todo = ({ todo }) => {
   }
 
   const update = () => {
-    updateTodo(title, color, text, heightText, nameImage, url, todo.id)
+    updateTodo(title, color, text, date, heightText, nameImage, url, todo.id)
   }
 
   const handler = () => {
@@ -62,13 +66,14 @@ export const Todo = ({ todo }) => {
       deleteFile(nameImage)
       setNameImg('')
       setUrl('')
-      updateTodo(title, color, text, heightText, '', '', todo.id)
+      updateTodo(title, color, text,date, heightText, '', '', todo.id)
     }
   }
 
   return (
-    <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
 
+    <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
+     
       <InputColor
         value={color}
         setColor={setColor}
@@ -98,6 +103,8 @@ export const Todo = ({ todo }) => {
         {url && < Img handler={handler} url={url} />}
 
         {!url && <InputFile uploadFiles={uploadFiles} />}
+
+        <InputDateTodo date={date} setDate={setDate} update={ update} />
 
         <button onClick={() => deleteTodo(todo)} className={style.btn}><SvgSelector id='delete' /></button>
       </div>

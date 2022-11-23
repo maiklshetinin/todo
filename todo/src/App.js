@@ -1,12 +1,14 @@
 import './App.css';
-import {  collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 import { db } from './firebase'
 import { useEffect, useState } from 'react';
 import { Todo } from './components/Todo/Todo';
 import { Form } from './components/Form/Form';
+import dayjs from 'dayjs';
 
 function App() {
   const [todos, setTodos] = useState([])
+
 
   useEffect(() => {
     const q = query(collection(db, 'todos'))
@@ -15,11 +17,12 @@ function App() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id })
       })
-      console.log(' console.log(todosArr)',todosArr);
+      console.log(' console.log(todosArr)', todosArr);
       setTodos(todosArr)
     })
     return () => unsubscribe()
   }, [])
+
 
   return (
     <div className='container'>

@@ -1,0 +1,10 @@
+.input_date{
+  width: 100%;
+  border: none;
+  text-align: center;
+  font-size: 18px;
+  color: rgb(172, 172, 172);
+}
+.input_date:hover{
+ cursor: pointer;
+}

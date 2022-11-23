@@ -1,0 +1,11 @@
+.input_date {
+  border: 0;
+  background-color: rgb(231, 231, 231);
+}
+.input_date:hover {
+  cursor: pointer;
+}
+
+.expired_date {
+  background-color: red;
+}
