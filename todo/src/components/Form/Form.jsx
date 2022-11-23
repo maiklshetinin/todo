@@ -40,7 +40,7 @@ export const Form = () => {
     setNameImg('')
     setHeightText('22px')
   }
-
+ 
   const uploadFiles = (e) => {
     setNameImg(e.target.files[0].name)
     const storageRef = ref(storage, `/${e.target.files[0].name}`);

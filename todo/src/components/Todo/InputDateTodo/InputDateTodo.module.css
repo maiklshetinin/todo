@@ -5,6 +5,11 @@
 .input_date:hover {
   cursor: pointer;
 }
+.input_date:focus {
+outline: solid;
+  outline-width: 2px;
+  outline-color: rgb(32, 90, 251);
+}
 
 .expired_date {
   background-color: red;

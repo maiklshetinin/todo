@@ -14,8 +14,6 @@ import style from './Todo.module.css'
 import { InputFile } from "../InputFile/InputFile";
 import { Img } from "./Img/Img";
 import { InputDateTodo } from "./InputDateTodo/InputDateTodo";
-import dayjs from "dayjs";
-
 
 export const Todo = ({ todo }) => {
   const [progress, setProgress] = useState(0)
@@ -73,7 +71,7 @@ export const Todo = ({ todo }) => {
   return (
 
     <li className={todo.completed ? `${style.todo_item} ${style.completed}` : style.todo_item}>
-     
+
       <InputColor
         value={color}
         setColor={setColor}
