@@ -1,5 +1,5 @@
-import { doc, updateDoc } from "firebase/firestore"
-import { db } from "../firebase"
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 /**
  * отправляет запрос на обновление документа с полями:
@@ -18,9 +18,10 @@ export const updateTodo = async (title, color, text, date, heightText, nameImg, 
     title: title,
     color: color,
     text: text,
-    date:date,
+    date: date,
     heightText: heightText,
     image: url,
     nameImage: nameImg,
-  })
-}
+    id: id,
+  });
+};
