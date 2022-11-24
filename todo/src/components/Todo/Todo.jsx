@@ -49,7 +49,7 @@ export const Todo = ({ todo }) => {
           .then(url => {
             setUrl(url)
             setProgress(0)
-            updateTodo(title, color, text, heightText, e.target.files[0].name, url, todo.id)
+            updateTodo(title, color, text, date, heightText, e.target.files[0].name, url, todo.id)
           })
       }
     )
