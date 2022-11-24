@@ -4,7 +4,7 @@ export interface ITodo {
   text: string;
   date: string;
   heightText: string;
-  image: string;
+  url: string;
   nameImage: string;
   completed: boolean;
   id: string;

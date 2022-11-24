@@ -1,11 +1,8 @@
+import { ITodo } from 'components/types/ITodo';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-/**
- *тоглит переключатель чекбокса на todo
- * @param {todo} todo обьект todo
- */
-export const toggleHandler = async (todo) => {
+export const toggleHandler = async (todo: ITodo) => {
   await updateDoc(doc(db, 'todos', todo.id), {
     completed: !todo.completed,
   });

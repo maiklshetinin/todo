@@ -1,12 +1,7 @@
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from '../firebase';
 
-/**
- * удаляет файл из storage
- * @param {string} name
- */
-
-export const deleteFile = (name) => {
+export const deleteFile = (name: string) => {
   const desertRef = ref(storage, `/${name}`);
 
   // Delete the file
@@ -15,6 +10,8 @@ export const deleteFile = (name) => {
       // File deleted successfully
     })
     .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
       // Uh-oh, an error occurred!
     });
 };

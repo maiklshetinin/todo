@@ -1,17 +1,20 @@
+import React from 'react';
 import './App.css';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { db } from './firebase';
 import { useEffect, useState } from 'react';
 import { Todo } from './components/Todo/Todo';
 import { Form } from './components/Form/Form';
+import { ITodo } from 'components/types/ITodo';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
     const q = query(collection(db, 'todos'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const todosArr = [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const todosArr: any = [];
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
